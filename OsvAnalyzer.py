@@ -26,6 +26,15 @@ class OsvAnalyzer:
         raise Exception('No analyzer found for ' + self.language)
 
 
+class MainAppFactory:
+    @staticmethod
+    def init_app(parser: argparse.ArgumentParser) -> OsvAnalyzer:
+        argumentsParsed = parser.parse_args(sys.argv[1:])
+
+        return OsvAnalyzer(argumentsParsed.language, argumentsParsed.file, AnalyzerFactory.create_analyzer_list())
+
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
         prog="OsvAnalyzer",
@@ -34,8 +43,5 @@ if __name__ == '__main__':
 
     OsvAnalyzer.configure_parser(parser)
 
-    argumentsParsed = parser.parse_args(sys.argv[1:])
-
-    analyzer = OsvAnalyzer(argumentsParsed.language, argumentsParsed.file, AnalyzerFactory.create_analyzer_list())
-
+    analyzer = MainAppFactory.init_app(parser)
     analyzer.start()
