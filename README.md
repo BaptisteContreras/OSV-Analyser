@@ -1,6 +1,6 @@
 # OsvAnalyzer
 
-A simple Python tool to analyse your deps file (for example composer.lock in a PHP application) and querying the awesome [OSV vuln database](https://osv.dev/) to check if one of you dependency is affected by a known vulnerability.
+A simple Python tool to analyse your deps file (for example composer.lock in a PHP application) and querying the awesome [OSV vuln database](https://osv.dev/) to check if one of your dependency is affected by a known vulnerability.
 
 
 ## Installation
