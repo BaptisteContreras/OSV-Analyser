@@ -16,8 +16,13 @@ class OsvAnalyzer:
         parser.add_argument('-l', '--language', type=str, required=True, choices=[Language.PHP.value])
         parser.add_argument('-f', '--file', type=str, required=True)
 
-    def start(self):
-        self.__select_analyzer().analyze(self.fileToAnalyze)
+    def start(self) -> int:
+        should_fail = self.__select_analyzer().analyze(self.fileToAnalyze)
+
+        if should_fail:
+            return 1
+
+        return 0
 
     def __select_analyzer(self):
         for analyzer in self.analyzerList:
@@ -29,10 +34,9 @@ class OsvAnalyzer:
 class MainAppFactory:
     @staticmethod
     def init_app(parser: argparse.ArgumentParser) -> OsvAnalyzer:
-        argumentsParsed = parser.parse_args(sys.argv[1:])
+        arguments_parsed = parser.parse_args(sys.argv[1:])
 
-        return OsvAnalyzer(argumentsParsed.language, argumentsParsed.file, AnalyzerFactory.create_analyzer_list())
-
+        return OsvAnalyzer(arguments_parsed.language, arguments_parsed.file, AnalyzerFactory.create_analyzer_list())
 
 
 if __name__ == '__main__':
@@ -44,4 +48,5 @@ if __name__ == '__main__':
     OsvAnalyzer.configure_parser(parser)
 
     analyzer = MainAppFactory.init_app(parser)
-    analyzer.start()
+
+    exit(analyzer.start())

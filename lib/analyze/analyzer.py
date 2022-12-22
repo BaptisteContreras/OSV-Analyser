@@ -9,20 +9,22 @@ class Analyzer:
         self.fileDriver = file_driver
         self.osvSdk = sdk
 
-    def supports(self, language: str):
+    def supports(self, language: str) -> bool:
         pass
 
-    def analyze(self, file_to_analyze: str):
+    def analyze(self, file_to_analyze: str) -> bool:
         deps = self.fileDriver.read_file(file_to_analyze)
         vulns = self.osvSdk.query_batch(deps)
 
-        vulnsFound = []
-        for subVulns in vulns:
-            if subVulns:
-                [vulnsFound.append(vuln) for vuln in subVulns]
+        vulns_found = []
+        for sub_vulns in vulns:
+            if sub_vulns:
+                [vulns_found.append(vuln) for vuln in sub_vulns]
 
-        if vulnsFound:
-            print(str(len(vulnsFound)) + " vulns found")
-            [print(vuln) for vuln in vulnsFound]
+        if vulns_found:
+            print(str(len(vulns_found)) + " vulns found")
+            [print(vuln) for vuln in vulns_found]
 
         [print(dep) for dep in deps]
+
+        return len(vulns_found) > 0
