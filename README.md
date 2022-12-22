@@ -4,7 +4,8 @@ A simple Python tool to analyse your deps file (for example composer.lock in a P
 
 
 ## Installation
-Python >= 3.7 is advised
+Python >= 3.7 is advised.
+
 You only need [**requests**](https://fr.python-requests.org/en/latest/) package, which can be installed with **pip**
 
 ```shell
