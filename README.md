@@ -4,12 +4,13 @@ A simple Python tool to analyse your deps file (for example composer.lock in a P
 
 
 ## Installation
- You only need [**requests**](https://fr.python-requests.org/en/latest/) package, which can be installed with **pip**
+Python >= 3.7 is advised
+You only need [**requests**](https://fr.python-requests.org/en/latest/) package, which can be installed with **pip**
 
 ```shell
 curl https://github.com/BaptisteContreras/OSV-Analyser.git
 pip install
-chmod +x OsvAnalyzer
+chmod +x OsvAnalyzer.py
 ```
 
 ## Usage
