@@ -67,7 +67,6 @@ class CacheHandler:
             cache_file.close()
 
 
-
 class PhpCacheHandler(CacheHandler):
     def __init__(self, cache_location, file_driver: FileDepsDriver):
         super().__init__(cache_location, file_driver, ".osv_php_cache.json")
