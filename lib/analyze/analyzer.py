@@ -1,13 +1,15 @@
 import itertools
 
+from lib.cache.cache_handler import CacheHandler
 from lib.deps.file_deps_driver import FileDepsDriver
 from lib.osv.sdk import OsvApiV1, OsvSdk
 
 
 class Analyzer:
-    def __init__(self, file_driver: FileDepsDriver, sdk: OsvSdk):
+    def __init__(self, file_driver: FileDepsDriver, sdk: OsvSdk, cache_handler: CacheHandler):
         self.fileDriver = file_driver
         self.osvSdk = sdk
+        self.cacheHandler = cache_handler
 
     def supports(self, language: str) -> bool:
         pass
@@ -26,5 +28,7 @@ class Analyzer:
             [print(vuln) for vuln in vulns_found]
 
         [print(dep) for dep in deps]
+
+        self.cacheHandler.save(deps, file_to_analyze)
 
         return len(vulns_found) > 0

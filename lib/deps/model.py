@@ -5,6 +5,10 @@ class Vuln:
         self.id = id
     def __str__(self) -> str:
         return "Vuln #" + self.id
+    def to_cache(self) -> dict:
+        return {
+            "id": self.id
+        }
 
 class Dependency:
     def __init__(self, name: str, version: str, ecosystem: Ecosystem):
@@ -13,6 +17,13 @@ class Dependency:
         self.ecosystem = ecosystem
         self.vulns = []
 
+    def to_cache(self) -> dict:
+        return {
+            "name": self.name,
+            "version": self.version,
+            "ecosystem": self.ecosystem.value,
+            "vulns": [vuln.to_cache() for vuln in self.vulns]
+        }
     def __str__(self) -> str:
         return self.ecosystem.value + " |  Vulns : " + ' '.join([vuln.__str__() for vuln in self.vulns])
 

@@ -18,9 +18,12 @@ chmod +x OsvAnalyzer.py
 
 ```shell
 
-python3 OsvAnalyzer.py -l PHP -f /path/to/composer.lock
+python3 OsvAnalyzer.py -a analyze -l PHP -f /path/to/composer.lock
 
 ```
+
+When you run the **analyze** action, it generates a cache file for the others actions.
+
 
 ## TODO
 
